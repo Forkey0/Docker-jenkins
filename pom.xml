@@ -117,6 +117,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>Jenkins-docker-integration</finalName>
 	</build>
 
 </project>
