@@ -45,6 +45,7 @@ class CategoryServiceTest {
         Mockito.doReturn(Constants.CreateCategory()).when(this.categoryRepository).getById(1L);
         Mockito.doReturn(Constants2.CreateNewCategory()).when(categoryRepository).save(Constants2.CreateNewCategory());
         return Mockito.doReturn(Constants2.CreateNewCategory()).when(categoryRepository).getById(1L);
+
     }
 
     public static final class Constants {

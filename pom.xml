@@ -119,5 +119,4 @@
 		</plugins>
 		<finalName>Jenkins-docker-integration</finalName>
 	</build>
-
 </project>
