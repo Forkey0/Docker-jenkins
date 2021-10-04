@@ -15,6 +15,9 @@
 	<description>first work project </description>
 	<properties>
 		<java.version>11</java.version>
+		<sonar.host.url>
+			http://0f3a-196-235-120-101.ngrok.io
+		</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -116,6 +119,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.6.0.1398</version>
+		</plugin>
 		</plugins>
 		<finalName>inetum-docker</finalName>
 	</build>
