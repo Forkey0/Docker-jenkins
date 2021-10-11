@@ -7,22 +7,19 @@ networks:
 
     
 services:
-
-  postgres:
-    image: postgres:13
-    container_name: postgresdb
+  db:
+    image: mysql:5.7
+    container_name: mysqldb
     expose:
-      - "5432"
+      - "3306"
     ports:
-      - "5432:5432"          
+      - "3306:3306"          
     environment:
-      POSTGRES_USER: ubuntu
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: inetum
+      MYSQL_USER: root
+      MYSQL_DATABASE: inetum
+
     volumes:
-      - ./BDD/data:/var/lib/postgresql/data
-      - pgconf:/etc/postgresql
-      - pglog:/var/log/postgresql
+      - ./data:/var/lib/mysql
     networks:
       - app-network
     restart: unless-stopped
