@@ -1,0 +1,65 @@
+version: "3"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
+  pgconf:
+    driver: local
+  pglog: 
+    driver: local
+    
+services:
+
+  postgres:
+    image: postgres:13
+    container_name: postgresdb
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"          
+    environment:
+      POSTGRES_USER: ubuntu
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: inetum
+    volumes:
+      - ./BDD/data:/var/lib/postgresql/data
+      - pgconf:/etc/postgresql
+      - pglog:/var/log/postgresql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  
+
+  back:
+      container_name: back
+      build: .
+      expose:
+        - "3000"
+      ports:
+        - "3000:3000"
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/inetum  
+      depends_on:
+        - postgres
+      networks:
+        - app-network  
+      restart: unless-stopped   
+   
+  nginx:
+      container_name: front
+      image: nginx
+      expose:
+        - "80"
+      ports:
+        - "80:80"
+      volumes:
+        - ./dist:/usr/share/nginx/html
+        - ./nginx.conf:/etc/nginx/nginx.conf
+      networks:
+        - app-network  
+      restart: unless-stopped
