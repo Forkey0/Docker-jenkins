@@ -4,13 +4,7 @@ networks:
   app-network:
     driver: bridge
 
-volumes:
-  pgdata:
-    driver: local
-  pgconf:
-    driver: local
-  pglog: 
-    driver: local
+
     
 services:
 
@@ -32,9 +26,7 @@ services:
     networks:
       - app-network
     restart: unless-stopped
-
   
-
   back:
       container_name: back
       build: .
@@ -63,3 +55,11 @@ services:
       networks:
         - app-network  
       restart: unless-stopped
+volumes:
+  pgdata:
+    driver: local
+    
+  pgconf:
+    driver: local
+  pglog: 
+    driver: local
